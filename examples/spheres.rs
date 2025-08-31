@@ -9,7 +9,7 @@ fn main() {
             DefaultPlugins,
             SdfPlugin,
             PhysicsPlugins::default(),
-            SdfCollisionPlugin::default(),
+            SdfCollisionPlugin::<()>::default(),
         ))
         .add_systems(Startup, setup)
         .add_systems(FixedUpdate, scale_container)

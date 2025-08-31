@@ -35,5 +35,5 @@ bevy_march = "0.1"
 avian3d = { version = "0.3", default-features = false, features = ["3d", "f32", "debug-plugin"] }
 
 [patch.crates-io]
-avian3d = {git = "https://github.com/NiseVoid/avian", rev = "abeb2aa"}
+avian3d = {git = "https://github.com/NiseVoid/avian", rev = "e4cb487"}
 bevy_prototype_sdf = {git = "https://github.com/NiseVoid/bevy_prototype_sdf", rev = "0cef48e"}

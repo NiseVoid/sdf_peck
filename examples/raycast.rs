@@ -15,15 +15,17 @@ fn main() {
     let mut app = App::new();
 
     app.add_plugins(DefaultPlugins);
-
     let march_shader = app.world().resource::<AssetServer>().load("march.wgsl");
-    app.add_plugins(RayMarcherPlugin::<SdfMaterial>::new(march_shader));
 
-    app.add_plugins((PhysicsPlugins::default(), SdfCollisionPlugin::default()))
-        .add_systems(Startup, setup)
-        .add_systems(FixedUpdate, cast_ray)
-        .add_systems(Update, move_camera)
-        .run();
+    app.add_plugins((
+        RayMarcherPlugin::<SdfMaterial>::new(march_shader),
+        PhysicsPlugins::default(),
+        SdfCollisionPlugin::<()>::default(),
+    ))
+    .add_systems(Startup, setup)
+    .add_systems(FixedUpdate, cast_ray)
+    .add_systems(Update, move_camera)
+    .run();
 }
 
 #[derive(Asset, Reflect, Clone, Debug, ShaderType)]

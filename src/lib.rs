@@ -1,4 +1,6 @@
 mod collider;
+use std::marker::PhantomData;
+
 pub use collider::{SdfCollider, SdfColliderKind};
 
 mod primitives;
@@ -12,30 +14,35 @@ pub use spatial_query::ColliderShape;
 
 use avian3d::prelude::*;
 use bevy::{
-    ecs::{intern::Interned, schedule::ScheduleLabel},
+    ecs::{intern::Interned, schedule::ScheduleLabel, system::SystemParamItem},
     prelude::*,
 };
 use bevy_prototype_sdf::SdfProcessed;
 
-pub struct SdfCollisionPlugin {
+pub struct SdfCollisionPlugin<H: CollisionHooks = ()> {
     schedule: Interned<dyn ScheduleLabel>,
+    phantom: PhantomData<H>,
 }
 
-impl Default for SdfCollisionPlugin {
+impl<H: CollisionHooks> Default for SdfCollisionPlugin<H> {
     fn default() -> Self {
         Self {
             schedule: FixedPostUpdate.intern(),
+            phantom: PhantomData,
         }
     }
 }
 
-impl Plugin for SdfCollisionPlugin {
+impl<H: CollisionHooks + 'static> Plugin for SdfCollisionPlugin<H>
+where
+    for<'w, 's> SystemParamItem<'w, 's, H>: CollisionHooks,
+{
     fn build(&self, app: &mut App) {
         app.register_type::<SdfCollider>()
             .add_plugins((
                 ColliderBackendPlugin::<SdfCollider>::new(self.schedule),
-                NarrowPhasePlugin::<SdfCollider>::default(),
                 SpatialQueryPlugin::<SdfCollider>::default(),
+                NarrowPhasePlugin::<SdfCollider, H>::default(),
             ))
             .add_observer(invalidate_changed_handle_colliders);
     }
