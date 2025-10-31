@@ -14,15 +14,15 @@ opt-level = 3
 debug-assertions = true
 
 [dependencies]
-bevy = { version = "0.16", default-features = false }
-bevy_math = { version = "0.16", features = ["approx"] }
-avian3d = { version = "0.4.0-dev", default-features = false, features = ["3d", "f32"] }
-bevy_heavy = { version = "0.2", default-features = false }
+bevy = { version = "0.17", default-features = false }
+bevy_math = { version = "0.17", features = ["approx"] }
+avian3d = { version = "0.4.0", default-features = false, features = ["3d", "f32"] }
+bevy_heavy = { version = "0.3", default-features = false }
 bevy_prototype_sdf = { version = "0.1", default-features = false, features=["bevy_asset"]}
 approx = "0.5"
 
 [dev-dependencies]
-bevy = {version = "0.16", default-features=false, features=[
+bevy = {version = "0.17", default-features=false, features=[
   "multi_threaded",
   "file_watcher",
   "bevy_pbr",
@@ -30,10 +30,12 @@ bevy = {version = "0.16", default-features=false, features=[
   "bevy_gizmos",
   "bevy_window",
   "wayland",
+  "zstd_rust"
 ]}
-bevy_march = "0.1"
-avian3d = { version = "0.3", default-features = false, features = ["3d", "f32", "debug-plugin"] }
+bevy_march = "0.2"
+avian3d = { version = "0.4", default-features = false, features = ["3d", "f32", "debug-plugin"] }
 
 [patch.crates-io]
-avian3d = {git = "https://github.com/NiseVoid/avian", rev = "5baf1b3"}
-bevy_prototype_sdf = {git = "https://github.com/NiseVoid/bevy_prototype_sdf", rev = "0cef48e"}
+avian3d = {git = "https://github.com/NiseVoid/avian", rev = "b3f72d4"}
+bevy_prototype_sdf = {git = "https://github.com/NiseVoid/bevy_prototype_sdf", rev = "71290b4"}
+bevy_march = {path = "../bevy_march"}

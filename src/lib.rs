@@ -49,7 +49,7 @@ where
 }
 
 fn invalidate_changed_handle_colliders(
-    trigger: Trigger<SdfProcessed>,
+    trigger: On<SdfProcessed>,
     mut query: Query<&mut SdfCollider>,
 ) {
     let SdfProcessed(id) = trigger.event();
