@@ -38,4 +38,4 @@ avian3d = { version = "0.4", default-features = false, features = ["3d", "f32", 
 [patch.crates-io]
 avian3d = {git = "https://github.com/NiseVoid/avian", rev = "b3f72d4"}
 bevy_prototype_sdf = {git = "https://github.com/NiseVoid/bevy_prototype_sdf", rev = "71290b4"}
-bevy_march = {path = "../bevy_march"}
+bevy_march = { git = "https://github.com/NiseVoid/bevy_march", rev = "e6fc1b9" }
